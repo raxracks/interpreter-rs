@@ -5,13 +5,15 @@ macro_rules! s {
     };
 }
 
-pub fn unescape(string: String) -> String {
-    return string
-        .replace("\\b", r"\b")
-        .replace("\\t", "\t")
-        .replace("\\n", "\n")
-        .replace("\\f", r"\f")
-        .replace("\\r", "\r")
-        .replace("\\'", "'")
-        .replace("\\\"", "\"");
+#[macro_export]
+macro_rules! unescape {
+    ($a:expr) => {
+        $a.replace("\\b", r"\b")
+            .replace("\\t", "\t")
+            .replace("\\n", "\n")
+            .replace("\\f", r"\f")
+            .replace("\\r", "\r")
+            .replace("\\'", "'")
+            .replace("\\\"", "\"")
+    };
 }

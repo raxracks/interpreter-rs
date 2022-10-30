@@ -1,7 +1,8 @@
 use std::{collections::HashMap, fs};
 
-use crate::helpers::*;
+// use crate::helpers::*;
 use crate::s;
+use crate::unescape;
 
 pub fn load(filename: String, code: &mut Vec<String>) {
     let text = fs::read_to_string(filename).unwrap();
@@ -18,7 +19,7 @@ pub fn load(filename: String, code: &mut Vec<String>) {
             }
 
             if val.len() > 0 {
-                code.push(unescape(val.clone()));
+                code.push(unescape!(val.clone()));
             }
 
             val = s!("");
@@ -38,7 +39,7 @@ pub fn load(filename: String, code: &mut Vec<String>) {
 
         if (chars[i] as char) == ' ' || (chars[i] as char) == '\n' {
             if val.len() > 0 {
-                code.push(unescape(val.clone()));
+                code.push(unescape!(val.clone()));
             }
 
             val = s!("");
@@ -52,7 +53,7 @@ pub fn load(filename: String, code: &mut Vec<String>) {
     }
 
     if val.len() > 0 {
-        code.push(unescape(val.clone()));
+        code.push(unescape!(val.clone()));
     }
 }
 
