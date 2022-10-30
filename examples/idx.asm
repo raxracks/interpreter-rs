@@ -7,18 +7,15 @@ sym i 0
 jmp start
 
 label print
-    print idx stacktop getsym i
+    print idx getsym param0 getsym i
 
-    push len stacktop
-    push getsym i
-    inc
-    sym i stacktop
+    sym i add getsym i 1
 
-    jlt print
+    jlt getsym i len getsym param0 print
 
     sym i 0
     ret
 
 label start
-    push getsym hello_world
+    sym param0 getsym hello_world
     jmp print
