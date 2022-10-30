@@ -1,8 +1,8 @@
-use std::collections::HashMap;
+use std::{collections::HashMap, time::SystemTime};
 
 use crate::s;
 
-pub fn getsym(
+fn getsym(
     stack: &mut Vec<String>,
     index: &mut usize,
     code: &[String],
@@ -15,7 +15,7 @@ pub fn getsym(
     return s!(symbols.get::<String>(&value).unwrap());
 }
 
-pub fn getstack(
+fn getstack(
     stack: &mut Vec<String>,
     _index: &mut usize,
     _code: &[String],
@@ -24,7 +24,21 @@ pub fn getstack(
     return stack.join(",");
 }
 
-pub fn len(
+fn getepoch(
+    _stack: &mut Vec<String>,
+    _index: &mut usize,
+    _code: &[String],
+    _symbols: &mut HashMap<String, String>,
+) -> String {
+    let now = SystemTime::now()
+        .duration_since(SystemTime::UNIX_EPOCH)
+        .ok()
+        .unwrap();
+
+    return now.as_millis().to_string();
+}
+
+fn len(
     stack: &mut Vec<String>,
     index: &mut usize,
     code: &[String],
@@ -34,7 +48,7 @@ pub fn len(
     return parse_param(stack, index, code, symbols).len().to_string();
 }
 
-pub fn idx(
+fn idx(
     stack: &mut Vec<String>,
     index: &mut usize,
     code: &[String],
@@ -62,6 +76,7 @@ pub fn parse_param(
     return match value.as_str() {
         "getsym" => getsym(stack, index, code, symbols),
         "getstack" => getstack(stack, index, code, symbols),
+        "getepoch" => getepoch(stack, index, code, symbols),
         "stacktop" => s!(stack.last().unwrap()),
         "len" => len(stack, index, code, symbols),
         "idx" => idx(stack, index, code, symbols),
