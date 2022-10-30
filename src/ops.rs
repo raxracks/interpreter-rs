@@ -98,8 +98,8 @@ pub fn je(
     labels: &mut HashMap<String, usize>,
     ret_i: &mut Vec<usize>,
 ) {
-    let l = stack.pop().unwrap().parse::<i32>().unwrap();
-    let r = stack.pop().unwrap().parse::<i32>().unwrap();
+    let l = stack.pop().unwrap().parse::<f64>().unwrap();
+    let r = stack.pop().unwrap().parse::<f64>().unwrap();
 
     if l == r {
         jmp(stack, index, code, symbols, labels, ret_i);
@@ -116,8 +116,8 @@ pub fn jne(
     labels: &mut HashMap<String, usize>,
     ret_i: &mut Vec<usize>,
 ) {
-    let l = stack.pop().unwrap().parse::<i32>().unwrap();
-    let r = stack.pop().unwrap().parse::<i32>().unwrap();
+    let l = stack.pop().unwrap().parse::<f64>().unwrap();
+    let r = stack.pop().unwrap().parse::<f64>().unwrap();
 
     if l == r {
         jmp(stack, index, code, symbols, labels, ret_i);
@@ -134,8 +134,8 @@ pub fn jlt(
     labels: &mut HashMap<String, usize>,
     ret_i: &mut Vec<usize>,
 ) {
-    let l = stack.pop().unwrap().parse::<i32>().unwrap();
-    let r = stack.pop().unwrap().parse::<i32>().unwrap();
+    let l = stack.pop().unwrap().parse::<f64>().unwrap();
+    let r = stack.pop().unwrap().parse::<f64>().unwrap();
 
     if l < r {
         jmp(stack, index, code, symbols, labels, ret_i);
@@ -152,8 +152,8 @@ pub fn jgt(
     labels: &mut HashMap<String, usize>,
     ret_i: &mut Vec<usize>,
 ) {
-    let l = stack.pop().unwrap().parse::<i32>().unwrap();
-    let r = stack.pop().unwrap().parse::<i32>().unwrap();
+    let l = stack.pop().unwrap().parse::<f64>().unwrap();
+    let r = stack.pop().unwrap().parse::<f64>().unwrap();
 
     if l > r {
         jmp(stack, index, code, symbols, labels, ret_i);
@@ -170,8 +170,8 @@ pub fn jle(
     labels: &mut HashMap<String, usize>,
     ret_i: &mut Vec<usize>,
 ) {
-    let l = stack.pop().unwrap().parse::<i32>().unwrap();
-    let r = stack.pop().unwrap().parse::<i32>().unwrap();
+    let l = stack.pop().unwrap().parse::<f64>().unwrap();
+    let r = stack.pop().unwrap().parse::<f64>().unwrap();
 
     if l <= r {
         jmp(stack, index, code, symbols, labels, ret_i);
@@ -188,8 +188,8 @@ pub fn jge(
     labels: &mut HashMap<String, usize>,
     ret_i: &mut Vec<usize>,
 ) {
-    let l = stack.pop().unwrap().parse::<i32>().unwrap();
-    let r = stack.pop().unwrap().parse::<i32>().unwrap();
+    let l = stack.pop().unwrap().parse::<f64>().unwrap();
+    let r = stack.pop().unwrap().parse::<f64>().unwrap();
 
     if l >= r {
         jmp(stack, index, code, symbols, labels, ret_i);
@@ -297,8 +297,8 @@ pub fn add(
     _labels: &mut HashMap<String, usize>,
     _ret_i: &mut Vec<usize>,
 ) {
-    let l = stack.pop().unwrap().parse::<i32>().unwrap();
-    let r = stack.pop().unwrap().parse::<i32>().unwrap();
+    let l = stack.pop().unwrap().parse::<f64>().unwrap();
+    let r = stack.pop().unwrap().parse::<f64>().unwrap();
 
     stack.push((l + r).to_string());
 }
@@ -311,8 +311,8 @@ pub fn sub(
     _labels: &mut HashMap<String, usize>,
     _ret_i: &mut Vec<usize>,
 ) {
-    let l = stack.pop().unwrap().parse::<i32>().unwrap();
-    let r = stack.pop().unwrap().parse::<i32>().unwrap();
+    let l = stack.pop().unwrap().parse::<f64>().unwrap();
+    let r = stack.pop().unwrap().parse::<f64>().unwrap();
 
     stack.push((l - r).to_string());
 }
@@ -325,8 +325,8 @@ pub fn mul(
     _labels: &mut HashMap<String, usize>,
     _ret_i: &mut Vec<usize>,
 ) {
-    let l = stack.pop().unwrap().parse::<i32>().unwrap();
-    let r = stack.pop().unwrap().parse::<i32>().unwrap();
+    let l = stack.pop().unwrap().parse::<f64>().unwrap();
+    let r = stack.pop().unwrap().parse::<f64>().unwrap();
 
     stack.push((l * r).to_string());
 }
@@ -339,8 +339,8 @@ pub fn div(
     _labels: &mut HashMap<String, usize>,
     _ret_i: &mut Vec<usize>,
 ) {
-    let l = stack.pop().unwrap().parse::<i32>().unwrap();
-    let r = stack.pop().unwrap().parse::<i32>().unwrap();
+    let l = stack.pop().unwrap().parse::<f64>().unwrap();
+    let r = stack.pop().unwrap().parse::<f64>().unwrap();
 
     stack.push((l / r).to_string());
 }
@@ -353,8 +353,8 @@ pub fn modulo(
     _labels: &mut HashMap<String, usize>,
     _ret_i: &mut Vec<usize>,
 ) {
-    let l = stack.pop().unwrap().parse::<i32>().unwrap();
-    let r = stack.pop().unwrap().parse::<i32>().unwrap();
+    let l = stack.pop().unwrap().parse::<f64>().unwrap();
+    let r = stack.pop().unwrap().parse::<f64>().unwrap();
 
     stack.push((l % r).to_string());
 }
@@ -367,10 +367,10 @@ pub fn pow(
     _labels: &mut HashMap<String, usize>,
     _ret_i: &mut Vec<usize>,
 ) {
-    let l = stack.pop().unwrap().parse::<i32>().unwrap();
-    let r = stack.pop().unwrap().parse::<u32>().unwrap();
+    let l = stack.pop().unwrap().parse::<f64>().unwrap();
+    let r = stack.pop().unwrap().parse::<f64>().unwrap();
 
-    stack.push(l.pow(r).to_string());
+    stack.push(l.powf(r).to_string());
 }
 
 pub fn inc(
@@ -381,7 +381,7 @@ pub fn inc(
     _labels: &mut HashMap<String, usize>,
     _ret_i: &mut Vec<usize>,
 ) {
-    let value = stack.pop().unwrap().parse::<i32>().unwrap() + 1;
+    let value = stack.pop().unwrap().parse::<f64>().unwrap() + 1.0;
 
     stack.push(value.to_string());
 }
@@ -394,7 +394,7 @@ pub fn dec(
     _labels: &mut HashMap<String, usize>,
     _ret_i: &mut Vec<usize>,
 ) {
-    let value = stack.pop().unwrap().parse::<i32>().unwrap() - 1;
+    let value = stack.pop().unwrap().parse::<f64>().unwrap() - 1.0;
 
     stack.push(value.to_string());
 }
